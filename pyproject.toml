@@ -1,0 +1,20 @@
+
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+[project]
+name = "backend-ids-model"
+version = "0.1.0"
+description = "Model-first, service-aware backend intrusion detection research prototype"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = ["PyYAML>=6.0", "jsonschema>=4.20"]
+[project.optional-dependencies]
+data = ["pandas>=2.1", "pyarrow>=14.0", "huggingface_hub>=0.20"]
+dev = ["pytest>=8.0", "pytest-cov>=5.0"]
+[tool.setuptools.packages.find]
+where = ["src"]
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src", "."]
+addopts = "-ra"
