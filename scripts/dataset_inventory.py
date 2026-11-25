@@ -25,7 +25,7 @@ def infer_type(values):
 
 def inspect_csv_stream(stream, name, sample_rows=100):
     raw = stream.read(MAX_SAMPLE_BYTES); stream.seek(0)
-    delimiter = "\\t" if Path(name).suffix.lower() == ".tsv" else ","
+    delimiter = "\t" if Path(name).suffix.lower() == ".tsv" else ","
     reader = csv.DictReader(io.StringIO(raw.decode("utf-8-sig", errors="replace")), delimiter=delimiter)
     columns = reader.fieldnames or []
     rows = [row for _, row in zip(range(sample_rows), reader)]

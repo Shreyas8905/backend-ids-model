@@ -1,1 +1,194 @@
-schema_version: "1.0"\nfeature_version: backend-features-v1\nwindowing:\n  primary_window_seconds: 10\n  burst_bucket_seconds: 1\n  rolling_context_seconds: 60\n  late_event_grace_ms: 500\n  temporal_features:\n    causal_only: true\n    ewma_alpha: 0.3\n    zscore_epsilon: 0.000001\n    minimum_prior_windows: 6\nprofiles:\n  backend_full_v1:\n    required_groups: [network, application, host]\n  backend_partial_v1:\n    required_groups: [network, host]\nfeature_status_values: [available, partial, unavailable, invalid]\nfeatures:\n  network:\n    inbound_bytes_rate:\n      unit: bytes_per_second\n      required_for_profiles: []\n    outbound_bytes_rate:\n      unit: bytes_per_second\n      required_for_profiles: []\n    inbound_packets_rate:\n      unit: packets_per_second\n      required_for_profiles: []\n    outbound_packets_rate:\n      unit: packets_per_second\n      required_for_profiles: []\n    active_connections:\n      unit: count\n      required_for_profiles: []\n    new_connections_rate:\n      unit: connections_per_second\n      required_for_profiles: []\n    failed_connections_rate:\n      unit: connections_per_second\n      required_for_profiles: []\n    connection_failure_ratio:\n      unit: ratio\n      required_for_profiles: []\n    unique_peer_estimate:\n      unit: count\n      required_for_profiles: []\n    unique_destination_ports:\n      unit: count\n      required_for_profiles: []\n    unique_destination_ips:\n      unit: count\n      required_for_profiles: []\n    inbound_outbound_ratio:\n      unit: ratio\n      required_for_profiles: []\n    tcp_reset_rate:\n      unit: events_per_second\n      required_for_profiles: []\n    tcp_retransmission_rate:\n      unit: events_per_second\n      required_for_profiles: []\n    mean_connection_duration:\n      unit: seconds\n      required_for_profiles: []\n    p95_connection_duration:\n      unit: seconds\n      required_for_profiles: []\n  application:\n    request_rate:\n      unit: requests_per_second\n      required_for_profiles: []\n    error_rate:\n      unit: requests_per_second\n      required_for_profiles: []\n    http_4xx_rate:\n      unit: responses_per_second\n      required_for_profiles: []\n    http_5xx_rate:\n      unit: responses_per_second\n      required_for_profiles: []\n    p50_request_latency_ms:\n      unit: milliseconds\n      required_for_profiles: []\n    p95_request_latency_ms:\n      unit: milliseconds\n      required_for_profiles: []\n    p99_request_latency_ms:\n      unit: milliseconds\n      required_for_profiles: []\n    active_requests:\n      unit: count\n      required_for_profiles: []\n    request_body_bytes_rate:\n      unit: bytes_per_second\n      required_for_profiles: []\n    response_body_bytes_rate:\n      unit: bytes_per_second\n      required_for_profiles: []\n    unique_route_count:\n      unit: count\n      required_for_profiles: []\n    authentication_failure_rate:\n      unit: events_per_second\n      required_for_profiles: []\n    http_get_ratio:\n      unit: ratio\n      required_for_profiles: []\n    http_post_ratio:\n      unit: ratio\n      required_for_profiles: []\n    http_put_ratio:\n      unit: ratio\n      required_for_profiles: []\n    http_delete_ratio:\n      unit: ratio\n      required_for_profiles: []\n    http_other_method_ratio:\n      unit: ratio\n      required_for_profiles: []\n    http_2xx_ratio:\n      unit: ratio\n      required_for_profiles: []\n    http_3xx_ratio:\n      unit: ratio\n      required_for_profiles: []\n    http_4xx_ratio:\n      unit: ratio\n      required_for_profiles: []\n    http_5xx_ratio:\n      unit: ratio\n      required_for_profiles: []\n  host:\n    cpu_utilization:\n      unit: ratio\n      required_for_profiles: []\n    memory_utilization:\n      unit: ratio\n      required_for_profiles: []\n    process_creation_rate:\n      unit: processes_per_second\n      required_for_profiles: []\n    process_termination_rate:\n      unit: processes_per_second\n      required_for_profiles: []\n    unique_executable_count:\n      unit: count\n      required_for_profiles: []\n    unexpected_executable_count:\n      unit: count\n      required_for_profiles: []\n    privileged_process_count:\n      unit: count\n      required_for_profiles: []\n    oom_event_count:\n      unit: count\n      required_for_profiles: []\n    container_restart_count:\n      unit: count\n      required_for_profiles: []\n  temporal:\n    request_rate_change:\n      unit: ratio\n      required_for_profiles: []\n    error_rate_change:\n      unit: ratio\n      required_for_profiles: []\n    inbound_rate_change:\n      unit: ratio\n      required_for_profiles: []\n    outbound_rate_change:\n      unit: ratio\n      required_for_profiles: []\n    connection_rate_change:\n      unit: ratio\n      required_for_profiles: []\n    request_rate_ewma:\n      unit: requests_per_second\n      required_for_profiles: []\n    connection_rate_ewma:\n      unit: connections_per_second\n      required_for_profiles: []\n    request_rate_zscore:\n      unit: zscore\n      required_for_profiles: []\n    latency_zscore:\n      unit: zscore\n      required_for_profiles: []\n    connection_burst_score:\n      unit: score\n      required_for_profiles: []\n    error_burst_score:\n      unit: score\n      required_for_profiles: []\n
+schema_version: "1.0"
+feature_version: backend-features-v1
+windowing:
+  primary_window_seconds: 10
+  burst_bucket_seconds: 1
+  rolling_context_seconds: 60
+  late_event_grace_ms: 500
+  temporal_features:
+    causal_only: true
+    ewma_alpha: 0.3
+    zscore_epsilon: 0.000001
+    minimum_prior_windows: 6
+profiles:
+  backend_full_v1:
+    required_groups: [network, application, host]
+  backend_partial_v1:
+    required_groups: [network, host]
+feature_status_values: [available, partial, unavailable, invalid]
+features:
+  network:
+    inbound_bytes_rate:
+      unit: bytes_per_second
+      required_for_profiles: []
+    outbound_bytes_rate:
+      unit: bytes_per_second
+      required_for_profiles: []
+    inbound_packets_rate:
+      unit: packets_per_second
+      required_for_profiles: []
+    outbound_packets_rate:
+      unit: packets_per_second
+      required_for_profiles: []
+    active_connections:
+      unit: count
+      required_for_profiles: []
+    new_connections_rate:
+      unit: connections_per_second
+      required_for_profiles: []
+    failed_connections_rate:
+      unit: connections_per_second
+      required_for_profiles: []
+    connection_failure_ratio:
+      unit: ratio
+      required_for_profiles: []
+    unique_peer_estimate:
+      unit: count
+      required_for_profiles: []
+    unique_destination_ports:
+      unit: count
+      required_for_profiles: []
+    unique_destination_ips:
+      unit: count
+      required_for_profiles: []
+    inbound_outbound_ratio:
+      unit: ratio
+      required_for_profiles: []
+    tcp_reset_rate:
+      unit: events_per_second
+      required_for_profiles: []
+    tcp_retransmission_rate:
+      unit: events_per_second
+      required_for_profiles: []
+    mean_connection_duration:
+      unit: seconds
+      required_for_profiles: []
+    p95_connection_duration:
+      unit: seconds
+      required_for_profiles: []
+  application:
+    request_rate:
+      unit: requests_per_second
+      required_for_profiles: []
+    error_rate:
+      unit: requests_per_second
+      required_for_profiles: []
+    http_4xx_rate:
+      unit: responses_per_second
+      required_for_profiles: []
+    http_5xx_rate:
+      unit: responses_per_second
+      required_for_profiles: []
+    p50_request_latency_ms:
+      unit: milliseconds
+      required_for_profiles: []
+    p95_request_latency_ms:
+      unit: milliseconds
+      required_for_profiles: []
+    p99_request_latency_ms:
+      unit: milliseconds
+      required_for_profiles: []
+    active_requests:
+      unit: count
+      required_for_profiles: []
+    request_body_bytes_rate:
+      unit: bytes_per_second
+      required_for_profiles: []
+    response_body_bytes_rate:
+      unit: bytes_per_second
+      required_for_profiles: []
+    unique_route_count:
+      unit: count
+      required_for_profiles: []
+    authentication_failure_rate:
+      unit: events_per_second
+      required_for_profiles: []
+    http_get_ratio:
+      unit: ratio
+      required_for_profiles: []
+    http_post_ratio:
+      unit: ratio
+      required_for_profiles: []
+    http_put_ratio:
+      unit: ratio
+      required_for_profiles: []
+    http_delete_ratio:
+      unit: ratio
+      required_for_profiles: []
+    http_other_method_ratio:
+      unit: ratio
+      required_for_profiles: []
+    http_2xx_ratio:
+      unit: ratio
+      required_for_profiles: []
+    http_3xx_ratio:
+      unit: ratio
+      required_for_profiles: []
+    http_4xx_ratio:
+      unit: ratio
+      required_for_profiles: []
+    http_5xx_ratio:
+      unit: ratio
+      required_for_profiles: []
+  host:
+    cpu_utilization:
+      unit: ratio
+      required_for_profiles: []
+    memory_utilization:
+      unit: ratio
+      required_for_profiles: []
+    process_creation_rate:
+      unit: processes_per_second
+      required_for_profiles: []
+    process_termination_rate:
+      unit: processes_per_second
+      required_for_profiles: []
+    unique_executable_count:
+      unit: count
+      required_for_profiles: []
+    unexpected_executable_count:
+      unit: count
+      required_for_profiles: []
+    privileged_process_count:
+      unit: count
+      required_for_profiles: []
+    oom_event_count:
+      unit: count
+      required_for_profiles: []
+    container_restart_count:
+      unit: count
+      required_for_profiles: []
+  temporal:
+    request_rate_change:
+      unit: ratio
+      required_for_profiles: []
+    error_rate_change:
+      unit: ratio
+      required_for_profiles: []
+    inbound_rate_change:
+      unit: ratio
+      required_for_profiles: []
+    outbound_rate_change:
+      unit: ratio
+      required_for_profiles: []
+    connection_rate_change:
+      unit: ratio
+      required_for_profiles: []
+    request_rate_ewma:
+      unit: requests_per_second
+      required_for_profiles: []
+    connection_rate_ewma:
+      unit: connections_per_second
+      required_for_profiles: []
+    request_rate_zscore:
+      unit: zscore
+      required_for_profiles: []
+    latency_zscore:
+      unit: zscore
+      required_for_profiles: []
+    connection_burst_score:
+      unit: score
+      required_for_profiles: []
+    error_burst_score:
+      unit: score
+      required_for_profiles: []
