@@ -5,7 +5,6 @@ __pycache__/
 .coverage
 htmlcov/
 *.py[cod]
-data/raw/*
 data/interim/*
 data/processed/*
 !data/raw/.gitkeep
@@ -13,10 +12,7 @@ data/processed/*
 !data/processed/.gitkeep
 audit/*
 !audit/.gitkeep
-models/*
 !models/.gitkeep
-*.joblib
-*.pkl
 *.parquet
 *.pcap
 *.pcapng
